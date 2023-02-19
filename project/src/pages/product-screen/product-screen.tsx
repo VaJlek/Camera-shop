@@ -1,26 +1,30 @@
 export default function ProductScreen (): JSX.Element {
   return (
     <>
-    <main>
-      <div className="page-content">
-        <div className="breadcrumbs">
-          <div className="container">
-            <ul className="breadcrumbs__list">
-              <li className="breadcrumbs__item"><a className="breadcrumbs__link" href="index.html">Главная
-                <svg width="5" height="8" aria-hidden="true">
-                  <use xlinkHref="#icon-arrow-mini"></use>
-                </svg></a>
-              </li>
-              <li className="breadcrumbs__item"><a className="breadcrumbs__link" href="catalog.html">Каталог
-                <svg width="5" height="8" aria-hidden="true">
-                  <use xlinkHref="#icon-arrow-mini"></use>
-                </svg></a>
-              </li>
-              <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">Ретрокамера «Das Auge IV»</span>
-              </li>
-            </ul>
+      <main>
+        <div className="page-content">
+          <div className="breadcrumbs">
+            <div className="container">
+              <ul className="breadcrumbs__list">
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link" href="index.html">Главная
+                    <svg width="5" height="8" aria-hidden="true">
+                      <use xlinkHref="#icon-arrow-mini"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li className="breadcrumbs__item">
+                  <a className="breadcrumbs__link" href="catalog.html">Каталог
+                    <svg width="5" height="8" aria-hidden="true">
+                      <use xlinkHref="#icon-arrow-mini"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">Ретрокамера «Das Auge IV»</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
           <div className="page-content__section">
             <section className="product">
               <div className="container">
@@ -253,7 +257,7 @@ export default function ProductScreen (): JSX.Element {
                       <div className="product-card__img">
                         <picture>
                           <source type="image/webp" srcSet="img/content/img3.webp, img/content/img3@2x.webp 2x" />
-                            <img src="img/content/img3.jpg" srcSet="img/content/img3@2x.jpg 2x" width="280" height="240" alt="Ретрокамера «Das Auge IV»" />
+                          <img src="img/content/img3.jpg" srcSet="img/content/img3@2x.jpg 2x" width="280" height="240" alt="Ретрокамера «Das Auge IV»" />
                         </picture>
                       </div>
                       <div className="product-card__info">
@@ -461,13 +465,13 @@ export default function ProductScreen (): JSX.Element {
               </div>
             </section>
           </div>
-      </div>
-    </main>
-    <a className="up-btn" href="#header">
-      <svg width="12" height="18" aria-hidden="true">
-        <use xlinkHref="#icon-arrow2"></use>
-      </svg>
-    </a>
+        </div>
+      </main>
+      <a className="up-btn" href="#header">
+        <svg width="12" height="18" aria-hidden="true">
+          <use xlinkHref="#icon-arrow2"></use>
+        </svg>
+      </a>
     </>
   );
 }

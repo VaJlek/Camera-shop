@@ -1,13 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import App from './components/app/app';
+import { store } from './store';
+import { fetchCamerasAction, fetchPromoAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+store.dispatch(fetchPromoAction());
+store.dispatch(fetchCamerasAction());
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <ToastContainer/>
+      <App />
+    </Provider>
   </React.StrictMode>,
 );

@@ -2,6 +2,7 @@ import Banner from '../../components/banner/banner';
 import CatalogFilter from '../../components/catalog-filter/catalog-filter';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
+import LoadingScreen from '../../components/loading/loading';
 import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import { useAppSelector } from '../../hooks';
@@ -11,7 +12,7 @@ export default function CatalogScreen (): JSX.Element {
   const { cameras } = useAppSelector((state) => state);
 
   if (!cameras) {
-    return <div>Произошла ошибка при загрузке данных камер</div>;
+    return <LoadingScreen />;
   }
 
   return (
@@ -78,7 +79,7 @@ export default function CatalogScreen (): JSX.Element {
                       </div>
                     </form>
                   </div>
-                  <ProductsList  cameras={cameras}/>
+                  <ProductsList cameras={cameras}/>
                   <Pagination />
                 </div>
               </div>

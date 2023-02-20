@@ -1,4 +1,3 @@
-import { useAppSelector } from '../../hooks';
 import { Cameras } from '../../types/types';
 import ProductCard from '../product-card/product-card';
 

@@ -1,18 +1,46 @@
+import { Link } from 'react-router-dom';
+import { AppRoute, PRODUCTS_PER_PAGE } from '../../const';
 
-export default function Pagination(): JSX.Element {
+type PaginationProps = {
+  camerasLength: number;
+  currentPage: number;
+};
+export default function Pagination({camerasLength, currentPage }: PaginationProps): JSX.Element {
+
+  const numberOfItems = camerasLength;
+  const numberOfPages = Math.ceil(numberOfItems / PRODUCTS_PER_PAGE);
+  const pageNumbers = Array.from({ length: numberOfPages}, (v, k) => k + 1);
+
+
   return(
     <div className="pagination">
       <ul className="pagination__list">
-        <li className="pagination__item"><a className="pagination__link pagination__link--text" href="2">Назад</a>
-        </li>
-        <li className="pagination__item"><a className="pagination__link pagination__link--active" href="1">1</a>
-        </li>
-        <li className="pagination__item"><a className="pagination__link" href="2">2</a>
-        </li>
-        <li className="pagination__item"><a className="pagination__link" href="3">3</a>
-        </li>
-        <li className="pagination__item"><a className="pagination__link pagination__link--text" href="2">Далее</a>
-        </li>
+        {currentPage > 1
+          ?
+          <li className="pagination__item">
+            <Link className="pagination__link pagination__link--text"
+              to={`${AppRoute.Catalog}/${ currentPage - 1}`}
+            >Назад
+            </Link>
+          </li>
+          : ''}
+        {pageNumbers.map((number) => (
+          <li className="pagination__item" key={number}>
+            <Link className={`pagination__link ${number === currentPage ? 'pagination__link--active' : ''}`}
+              to={`${AppRoute.Catalog}/${number}`}
+            >{number}
+            </Link>
+          </li>
+        ))}
+        {currentPage !== numberOfPages
+          ?
+          <li className="pagination__item">
+            <Link className="pagination__link pagination__link--text"
+              to={`${AppRoute.Catalog}/${ currentPage + 1}`}
+            >Далее
+            </Link>
+          </li>
+          : ''}
       </ul>
     </div>
   );

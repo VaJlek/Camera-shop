@@ -6,12 +6,14 @@ type InitialState = {
   promo: Promo | null;
   cameras: Cameras | null;
   camera: Camera | null;
+  currentPage: number;
 }
 
 const initialState: InitialState = {
   promo: null,
   cameras: null,
   camera: null,
+  currentPage: 1,
 };
 
 const reducer = createReducer(initialState, (builder) => {

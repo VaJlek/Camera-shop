@@ -24,7 +24,7 @@ export default function CatalogScreen (): JSX.Element {
   }
 
   return (
-    <>
+    <div className="wrapper">
       <Header/>
       <main>
         <Banner />
@@ -48,6 +48,6 @@ export default function CatalogScreen (): JSX.Element {
         </div>
       </main>
       <Footer/>
-    </>
+    </div>
   );
 }

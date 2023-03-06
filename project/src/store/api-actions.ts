@@ -2,12 +2,11 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AppDispatch, State } from '../types/state';
-import { Camera, Cameras, Promo, ReviewPost, Reviews } from '../types/types';
+import { Camera, Cameras, Promo, Review, ReviewPost, Reviews } from '../types/types';
 import { APIRoute } from '../const';
-import { loadCamera, loadCameras, loadPromo, loadReviews, loadSimilarCameras, postReview } from './action';
 
 export const fetchPromoAction = createAsyncThunk<
-  void,
+  Promo,
   undefined,
   {
    dispatch: AppDispatch;
@@ -15,10 +14,10 @@ export const fetchPromoAction = createAsyncThunk<
    extra: AxiosInstance;
   }>(
     'fetchPromo',
-    async (_arg, { dispatch, extra: api }) => {
+    async (_arg, { extra: api }) => {
       try {
         const { data } = await api.get<Promo>(APIRoute.Promo);
-        dispatch(loadPromo(data));
+        return data;
       } catch (error) {
         toast.error('Loading promo error');
         throw error;
@@ -26,7 +25,7 @@ export const fetchPromoAction = createAsyncThunk<
     });
 
 export const fetchCamerasAction = createAsyncThunk<
-  void,
+  Cameras,
   undefined,
   {
     dispatch: AppDispatch;
@@ -34,10 +33,10 @@ export const fetchCamerasAction = createAsyncThunk<
     extra: AxiosInstance;
   }>(
     'fetchCameras',
-    async (_arg, { dispatch, extra: api }) => {
+    async (_arg, { extra: api }) => {
       try {
         const { data } = await api.get<Cameras>(APIRoute.Cameras);
-        dispatch(loadCameras(data));
+        return data;
       } catch (error) {
         toast.error('Loading cameras error');
         throw error;
@@ -45,7 +44,7 @@ export const fetchCamerasAction = createAsyncThunk<
     });
 
 export const fetchCameraAction = createAsyncThunk<
-  void,
+  Camera,
   number,
   {
     dispatch: AppDispatch;
@@ -53,10 +52,10 @@ export const fetchCameraAction = createAsyncThunk<
     extra: AxiosInstance;
   }>(
     'fetchCamera',
-    async (cameraId, { dispatch, extra: api }) => {
+    async (cameraId, { extra: api }) => {
       try {
         const { data } = await api.get<Camera>(`${APIRoute.Cameras}/${cameraId}`);
-        dispatch(loadCamera(data));
+        return data;
       } catch (error) {
         toast.error('Loading camera error');
         throw error;
@@ -64,7 +63,7 @@ export const fetchCameraAction = createAsyncThunk<
     });
 
 export const fetchReviewsAction = createAsyncThunk<
-  void,
+  Reviews,
   number,
   {
     dispatch: AppDispatch;
@@ -72,10 +71,10 @@ export const fetchReviewsAction = createAsyncThunk<
     extra: AxiosInstance;
   }>(
     'fetchReviews',
-    async (cameraId, { dispatch, extra: api }) => {
+    async (cameraId, { extra: api }) => {
       try {
-        const { data } = await api.get<Reviews>(`${APIRoute.Cameras}/${cameraId}/reviews`);
-        dispatch(loadReviews(data));
+        const { data } = await api.get<Reviews>(`${APIRoute.Cameras}/${cameraId}/reviews?_sort=createAt&_order=desc`);
+        return data;
       } catch (error) {
         toast.error('Loading review error');
         throw error;
@@ -83,17 +82,17 @@ export const fetchReviewsAction = createAsyncThunk<
     });
 
 export const fetchSimilarCamerasAction = createAsyncThunk<
-  void,
+  Cameras,
   number,
   {
     dispatch: AppDispatch;
     state: State;
     extra: AxiosInstance;
   }>(
-    'fetchSimilarCameras', async (cameraId, { dispatch, extra: api }) => {
+    'fetchSimilarCameras', async (cameraId, { extra: api }) => {
       try {
         const { data } = await api.get<Cameras>(`${APIRoute.Cameras}/${cameraId}/similar`);
-        dispatch(loadSimilarCameras(data));
+        return data;
       } catch (error) {
         toast.error('Loading similar cameras error');
         throw error;
@@ -101,7 +100,7 @@ export const fetchSimilarCamerasAction = createAsyncThunk<
     });
 
 export const postReviewAction = createAsyncThunk<
-  void,
+  Review,
   ReviewPost,
   {
     dispatch: AppDispatch;
@@ -110,10 +109,10 @@ export const postReviewAction = createAsyncThunk<
   }>(
     'postReview', async (
       { userName, advantage, disadvantage, review, rating, cameraId },
-      { dispatch, extra: api },
+      { extra: api },
     ) => {
       try {
-        await api.post<ReviewPost>(APIRoute.Reviews, {
+        const {data} = await api.post<Review>(APIRoute.Reviews, {
           userName,
           advantage,
           disadvantage,
@@ -121,7 +120,7 @@ export const postReviewAction = createAsyncThunk<
           rating,
           cameraId,
         });
-        dispatch(postReview());
+        return data;
       } catch (error) {
         toast.error('Send rewiew error');
         throw error;

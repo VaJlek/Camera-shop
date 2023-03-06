@@ -8,6 +8,9 @@ import Product from '../../components/product/product';
 import ReviewBlock from '../../components/rewiew-block/rewiew-block';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchCameraAction, fetchReviewsAction, fetchSimilarCamerasAction } from '../../store/api-actions';
+import { getCamera, getSimilar } from '../../store/cameras-data/selectors';
+import { getReviews } from '../../store/rewiews-data/selectors';
+import { Camera } from '../../types/types';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function ProductScreen (): JSX.Element {
@@ -15,13 +18,17 @@ export default function ProductScreen (): JSX.Element {
   const {id} = useParams();
   const dispatch = useAppDispatch();
 
+  const camera: Camera | undefined = useAppSelector(getCamera);
+  const similarCameras = useAppSelector(getSimilar);
+  const reviews = useAppSelector(getReviews);
+
   useEffect(() => {
     dispatch(fetchCameraAction(Number(id)));
     dispatch(fetchReviewsAction(Number(id)));
     dispatch(fetchSimilarCamerasAction(Number(id)));
   }, [dispatch, id]);
 
-  const { camera, similarCameras, reviews } = useAppSelector((state) => state);
+  console.log(camera);
 
   if (!camera) {
     return <NotFoundScreen />;

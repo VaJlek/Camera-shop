@@ -9,10 +9,11 @@ import Pagination from '../../components/pagination/pagination';
 import ProductsList from '../../components/products-list/products-list';
 import { PRODUCTS_PER_PAGE } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getCameras } from '../../store/cameras-data/selectors';
 
 export default function CatalogScreen (): JSX.Element {
 
-  const { cameras } = useAppSelector((state) => state);
+  const cameras = useAppSelector(getCameras);
 
   const currentPage = 1;
 

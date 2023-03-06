@@ -47,3 +47,9 @@ export type ReviewPost = {
   rating: number;
   cameraId: number;
 };
+
+export type PriceRange = {
+  MinPrice: number;
+  MaxPrice: number;
+};
+

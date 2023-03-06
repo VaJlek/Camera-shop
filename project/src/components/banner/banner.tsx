@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getPromo } from '../../store/promo-data/selectors';
 
 export default function Banner(): JSX.Element {
 
-  const { promo } = useAppSelector((state) => state);
+  const promo = useAppSelector(getPromo);
 
   return (
     <div className="banner">

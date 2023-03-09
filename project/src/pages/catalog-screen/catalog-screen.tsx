@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import CatalogFilter from '../../components/catalog-filter/catalog-filter';
@@ -14,9 +15,7 @@ import { getCameras } from '../../store/cameras-data/selectors';
 export default function CatalogScreen (): JSX.Element {
 
   const cameras = useAppSelector(getCameras);
-
-  const currentPage = 1;
-
+  const currentPage = Number(useParams().page);
   const lastProductIndex = Number(currentPage) * PRODUCTS_PER_PAGE;
   const firstProductIndex = lastProductIndex - PRODUCTS_PER_PAGE;
 

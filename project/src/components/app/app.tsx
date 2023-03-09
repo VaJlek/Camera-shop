@@ -1,6 +1,6 @@
 import { HelmetProvider } from 'react-helmet-async';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_PAGE_NUMBER } from '../../const';
 import BasketScreen from '../../pages/basket-screen/basket-screen';
 import CatalogScreen from '../../pages/catalog-screen/catalog-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
@@ -12,10 +12,10 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<Navigate to={ AppRoute.Catalog } />}
+          element={<Navigate to={ `${AppRoute.Catalog }/${DEFAULT_PAGE_NUMBER}` }/>}
         />
         <Route
-          path={AppRoute.Catalog}
+          path={`${AppRoute.Catalog}/:page`}
           element={<CatalogScreen />}
         />
         <Route

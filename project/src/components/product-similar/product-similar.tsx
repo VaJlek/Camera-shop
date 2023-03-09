@@ -10,17 +10,16 @@ type ProductSimilarProps = {
 
 export default function ProductSimilar({ similarCameras }: ProductSimilarProps): JSX.Element {
 
-  const [lastCardIndex, setLastCardIndex] = useState(PRODUCTS_ON_SLIDER);
+  const [firstCardIndex, setfirstCardIndex] = useState(0);
 
-  const firstCardIndex = lastCardIndex - PRODUCTS_ON_SLIDER;
+  const lastCardIndex = firstCardIndex + PRODUCTS_ON_SLIDER;
 
   const handleSliderNextClick = () => {
-    setLastCardIndex((prevState) => prevState + 1);
-
+    setfirstCardIndex(firstCardIndex + 1);
   };
 
   const handleSliderPrevClick = () => {
-    setLastCardIndex((prevState) => prevState - 1);
+    setfirstCardIndex(firstCardIndex - 1);
   };
 
   return (
@@ -31,7 +30,11 @@ export default function ProductSimilar({ similarCameras }: ProductSimilarProps):
           <div className="product-similar__slider">
             <div className="product-similar__slider-list">
               {similarCameras?.slice(firstCardIndex, lastCardIndex).map((similarCamera) => (
-                <ProductCard key={similarCamera.id} camera={similarCamera} />
+                <ProductCard
+                  key={similarCamera.id}
+                  camera={similarCamera}
+                  isActive={similarCameras.includes(similarCamera)}
+                />
               ))}
             </div>
             <button

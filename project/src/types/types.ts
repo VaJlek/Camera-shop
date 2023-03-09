@@ -48,8 +48,9 @@ export type ReviewPost = {
   cameraId: number;
 };
 
+export type ReviewPostKeys = keyof ReviewPost;
+
 export type PriceRange = {
   MinPrice: number;
   MaxPrice: number;
 };
-

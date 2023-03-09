@@ -1,13 +1,14 @@
 export const REVIEWS_COUNT = 3;
 export const PRODUCTS_PER_PAGE = 9;
 export const PRODUCTS_ON_SLIDER = 3;
+export const DEFAULT_PAGE_NUMBER = 1;
 
 export enum AppRoute {
   Root = '/',
   Catalog = '/catalog',
-  CatalogPage = '/catalog/page_:page',
+  CatalogPage = '/catalog/:page',
   Basket = '/basket',
-  Product = '/product/:id',
+  Product = '/product',
   NotFound = '/404'
 }
 
@@ -35,4 +36,10 @@ export const enum FetchStatus {
 export enum Tab {
   Description = 'description',
   Specification = 'specification',
+}
+
+export enum ModalState {
+  Closed = 'closed',
+  ReviewForm = 'reviewForm',
+  ReviewSuccess = 'reviewSuccess',
 }

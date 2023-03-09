@@ -3,7 +3,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AppDispatch, State } from '../types/state';
 import { Camera, Cameras, Promo, Review, ReviewPost, Reviews } from '../types/types';
-import { APIRoute } from '../const';
+import { APIRoute, ModalState } from '../const';
+import { changeModalState } from './app-process/app-process';
 
 export const fetchPromoAction = createAsyncThunk<
   Promo,
@@ -109,10 +110,10 @@ export const postReviewAction = createAsyncThunk<
   }>(
     'postReview', async (
       { userName, advantage, disadvantage, review, rating, cameraId },
-      { extra: api },
+      { dispatch, extra: api },
     ) => {
       try {
-        const {data} = await api.post<Review>(APIRoute.Reviews, {
+        const { data } = await api.post<Review>(APIRoute.Reviews, {
           userName,
           advantage,
           disadvantage,
@@ -120,6 +121,8 @@ export const postReviewAction = createAsyncThunk<
           rating,
           cameraId,
         });
+
+        dispatch(changeModalState(ModalState.ReviewSuccess));
         return data;
       } catch (error) {
         toast.error('Send rewiew error');

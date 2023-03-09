@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { Camera } from '../../types/types';
@@ -5,11 +6,12 @@ import RateStars from '../rate-stars/rate-stars';
 
 type ProductProps = {
   camera: Camera;
+  isActive?: boolean;
 };
 
-export default function ProductCard ({ camera }: ProductProps): JSX.Element {
+export default function ProductCard ({ camera, isActive }: ProductProps): JSX.Element {
   return(
-    <div className="product-card">
+    <div className={cn('product-card', {'is-active' : isActive})}>
       <div className="product-card__img">
         <picture>
           <source

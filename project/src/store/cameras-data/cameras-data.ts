@@ -1,42 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, FetchStatus } from '../../const';
-import { Camera, Cameras, PriceRange } from '../../types/types';
+import { Camera, Cameras } from '../../types/types';
 import { fetchCamerasAction, fetchSimilarCamerasAction, fetchCameraAction } from '../api-actions';
 
 export type CamerasData = {
   cameras: Cameras;
   camerasFetchStatus: string;
   camerasTotalCount: number;
-  product: Camera | undefined;
-  productFetchStatus: string;
+  camera: Camera | undefined;
+  cameraFetchStatus: string;
   similar: Cameras;
-  camerasByName: Cameras;
-  priceRange: PriceRange;
-  priceRangeFetchStatus: string;
-  carrentSearchParams: [string, string][];
 };
 
 const initialState: CamerasData = {
   cameras: [],
   camerasFetchStatus: FetchStatus.Idle,
   camerasTotalCount: 0,
-  product: undefined,
-  productFetchStatus: FetchStatus.Idle,
+  camera: undefined,
+  cameraFetchStatus: FetchStatus.Idle,
   similar: [],
-  camerasByName: [],
-  priceRange: {MinPrice: 0, MaxPrice: 0},
-  priceRangeFetchStatus: FetchStatus.Idle,
-  carrentSearchParams: [],
 };
 
 export const camerasData = createSlice({
   name: NameSpace.Cameras,
   initialState,
-  reducers: {
-    setCarrentSearchParams: (state, action: {payload: [string, string][]}) => {
-      state.carrentSearchParams = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchCamerasAction.pending, (state) => {
@@ -51,15 +39,15 @@ export const camerasData = createSlice({
         state.camerasFetchStatus = FetchStatus.Rejected;
       })
       .addCase(fetchCameraAction.pending, (state) => {
-        state.productFetchStatus = FetchStatus.Loading;
+        state.cameraFetchStatus = FetchStatus.Loading;
       })
       .addCase(fetchCameraAction.fulfilled, (state, action) => {
-        state.product = action.payload;
-        state.productFetchStatus = FetchStatus.Success;
+        state.camera = action.payload;
+        state.cameraFetchStatus = FetchStatus.Success;
       })
       .addCase(fetchCameraAction.rejected, (state) => {
-        state.product = undefined;
-        state.productFetchStatus = FetchStatus.Rejected;
+        state.camera = undefined;
+        state.cameraFetchStatus = FetchStatus.Rejected;
       })
       .addCase(fetchSimilarCamerasAction.fulfilled, (state, action) => {
         state.similar = action.payload;
@@ -67,4 +55,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {setCarrentSearchParams} = camerasData.actions;
+

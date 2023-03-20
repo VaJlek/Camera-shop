@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { storeForFake, makeFakeProduct, makeFakeReviewPost } from '../../tests/mocks';
+import { storeForFake, makeFakeReviewPost, makeFakeCamera } from '../../tests/mocks';
 import HistoryRouter from '../history-route/history-route';
 import AddReviewModal from './review-modal';
 
 const history = createMemoryHistory();
-const fakeProduct = makeFakeProduct();
+const fakeCamera = makeFakeCamera();
 const fakeReviewComment = makeFakeReviewPost();
 
 const fakeStore = storeForFake({
@@ -18,7 +18,7 @@ const fakeStore = storeForFake({
 const fakeApp = (
   <Provider store={fakeStore}>
     <HistoryRouter history={history}>
-      <AddReviewModal cameraId={fakeProduct.id} onClick={() => null}/>
+      <AddReviewModal cameraId={fakeCamera.id} onClick={() => null}/>
     </HistoryRouter>
   </Provider>
 );

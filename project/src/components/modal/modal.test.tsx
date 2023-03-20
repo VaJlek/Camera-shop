@@ -3,21 +3,21 @@ import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import HistoryRouter from '../../components/history-route/history-route';
 import { ModalState } from '../../const';
-import { makeFakeProduct, storeForFake } from '../../tests/mocks';
+import { makeFakeCamera, storeForFake } from '../../tests/mocks';
 import Modal from './modal';
 
 const history = createMemoryHistory();
-const fakeProduct = makeFakeProduct();
+const fakeCamera = makeFakeCamera();
 
 describe('Component: Modal', () => {
   it('should render correctly', () => {
     const fakeStore = storeForFake({
       APP: {
         modalState: ModalState.ReviewForm,
-        selectidCard: fakeProduct,
+        selectidCard: fakeCamera,
       },
       CAMERAS: {
-        camera: fakeProduct,
+        camera: fakeCamera,
       }
     });
 

@@ -21,6 +21,6 @@ describe('Component: Pagination', () => {
 
     expect(screen.getByText('1')).toBeInTheDocument();
     expect(screen.getByText(`${Math.ceil(FAKE_CAMERAS_AMOUNT / PRODUCTS_PER_PAGE)}`)).toBeInTheDocument();
-    expect(screen.getByTestId('pagination')).toBeInTheDocument();
+    expect(screen.getByText('Далее')).toBeInTheDocument();
   });
 });

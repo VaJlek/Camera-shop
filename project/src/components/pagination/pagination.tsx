@@ -7,8 +7,7 @@ type PaginationProps = {
 };
 export default function Pagination({camerasLength, currentPage }: PaginationProps): JSX.Element {
 
-  const numberOfItems = camerasLength;
-  const numberOfPages = Math.ceil(numberOfItems / PRODUCTS_PER_PAGE);
+  const numberOfPages = Math.ceil(camerasLength / PRODUCTS_PER_PAGE);
   const pageNumbers = Array.from({ length: numberOfPages}, (v, k) => k + 1);
 
 

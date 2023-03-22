@@ -13,7 +13,6 @@ import { fetchCameraAction, fetchReviewsAction, fetchSimilarCamerasAction } from
 import { getModalState } from '../../store/app-process/selectors';
 import { getCamera, getSimilar } from '../../store/cameras-data/selectors';
 import { getReviews } from '../../store/rewiews-data/selectors';
-import { Camera } from '../../types/types';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function ProductScreen (): JSX.Element {
@@ -27,7 +26,7 @@ export default function ProductScreen (): JSX.Element {
     dispatch(fetchReviewsAction(Number(id)));
   }, [dispatch, id]);
 
-  const camera: Camera | undefined = useAppSelector(getCamera);
+  const camera = useAppSelector(getCamera);
   const similarCameras = useAppSelector(getSimilar);
   const reviews = useAppSelector(getReviews);
   const modalState: string = useAppSelector(getModalState);

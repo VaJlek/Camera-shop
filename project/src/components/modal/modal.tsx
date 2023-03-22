@@ -3,7 +3,6 @@ import { ModalState } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeModalState } from '../../store/app-process/app-process';
 import { getCamera } from '../../store/cameras-data/selectors';
-import { Camera } from '../../types/types';
 import ReviewModal from './review-modal';
 import ReviewSuccess from './review-success';
 
@@ -14,7 +13,7 @@ type ModalProps = {
 export default function Modal({modalState}: ModalProps): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const camera: Camera | undefined = useAppSelector(getCamera);
+  const camera = useAppSelector(getCamera);
 
   const handleClickCloseButton = () => {
     dispatch(changeModalState(ModalState.Closed));

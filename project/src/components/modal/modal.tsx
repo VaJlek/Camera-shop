@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { useEffect } from 'react';
 import { ModalState } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeModalState } from '../../store/app-process/app-process';
@@ -25,7 +26,12 @@ export default function Modal({modalState}: ModalProps): JSX.Element {
     }
   };
 
-  document.addEventListener('keydown', handleEscPress);
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscPress);
+    return () => {
+      document.removeEventListener('keydown', handleEscPress);
+    };
+  });
 
   const getClassName = () => cn('modal is-active', {
     'modal--narrow': modalState === ModalState.ReviewSuccess

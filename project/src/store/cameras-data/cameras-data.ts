@@ -7,7 +7,7 @@ export type CamerasData = {
   cameras: Cameras;
   camerasFetchStatus: string;
   camerasTotalCount: number;
-  camera: Camera | undefined;
+  camera?: Camera;
   cameraFetchStatus: string;
   similar: Cameras;
 };

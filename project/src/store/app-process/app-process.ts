@@ -4,7 +4,7 @@ import { Camera, Reviews } from '../../types/types';
 
 export type AppProcess = {
   modalState: string;
-  selectedCameraId: Camera | undefined;
+  selectedCameraId?: Camera;
   reviewsAmount: number;
   reviewsOnPage: Reviews;
   sortType: string | null;
@@ -27,7 +27,7 @@ export const appProcess = createSlice({
     changeModalState: (state, action: {payload: string}) => {
       state.modalState = action.payload;
     },
-    setSelectedCamera: (state, action: {payload: Camera | undefined}) => {
+    setSelectedCamera: (state, action: {payload: Camera}) => {
       state.selectedCameraId = action.payload;
     },
     setReviewsAmount: (state, action: {payload: number}) => {

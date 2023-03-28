@@ -10,7 +10,7 @@ describe('Component: Header', () => {
 
     render(
       <HistoryRouter history={history}>
-         <Header />
+        <Header />
       </HistoryRouter>,
     );
 

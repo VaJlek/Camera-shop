@@ -24,6 +24,6 @@ describe('Component: Banner', () => {
       </HistoryRouter>,
     );
 
-   expect(screen.getByText(`${fakePromo.name}`)).toBeInTheDocument();
+    expect(screen.getByText(`${fakePromo.name}`)).toBeInTheDocument();
   });
 });

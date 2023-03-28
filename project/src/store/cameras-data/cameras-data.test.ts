@@ -1,5 +1,5 @@
 import { FetchStatus } from '../../const';
-import { makeFakeCamera, FAKE_CAMERAS_AMOUNT, makeFakeCameras } from '../../tests/mocks';
+import { makeFakeCamera, makeFakeCameras } from '../../tests/mocks';
 import { fetchCameraAction, fetchCamerasAction, fetchSimilarCamerasAction } from '../api-actions';
 import { Camera, Cameras } from '../../types/types';
 import { camerasData, CamerasData } from './cameras-data';

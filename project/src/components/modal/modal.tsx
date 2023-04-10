@@ -6,6 +6,8 @@ import { changeModalState } from '../../store/app-process/app-process';
 import { getCamera } from '../../store/cameras-data/selectors';
 import ReviewModal from './review-modal';
 import ReviewSuccess from './review-success';
+import FocusLock from 'react-focus-lock';
+import { RemoveScroll } from 'react-remove-scroll';
 
 type ModalProps = {
   modalState: string;
@@ -38,16 +40,20 @@ export default function Modal({modalState}: ModalProps): JSX.Element {
   });
 
   return (
-    <div className={getClassName()} >
-      <div className="modal__wrapper" data-testid="modal">
-        <div className="modal__overlay" onClick={() => dispatch(changeModalState(ModalState.Closed))}></div>
-        {modalState === ModalState.ReviewForm
+    <FocusLock>
+      <RemoveScroll enabled>
+        <div className={getClassName()} >
+          <div className="modal__wrapper" data-testid="modal">
+            <div className="modal__overlay" onClick={() => dispatch(changeModalState(ModalState.Closed))}></div>
+            {modalState === ModalState.ReviewForm
             && camera
             && <ReviewModal cameraId={camera.id} onClick={handleClickCloseButton}/>}
-        {modalState === ModalState.ReviewSuccess
+            {modalState === ModalState.ReviewSuccess
             && <ReviewSuccess onClick={handleClickCloseButton}/>}
-      </div>
-    </div>
+          </div>
+        </div>
+      </RemoveScroll>
+    </FocusLock>
   );
 }
 

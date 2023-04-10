@@ -15,6 +15,12 @@ import { getCamera, getSimilar } from '../../store/cameras-data/selectors';
 import { getReviews } from '../../store/rewiews-data/selectors';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
+const scrollToTop = (x: number) => window.scrollTo({
+  top: x,
+  behavior: 'smooth'
+});
+
+
 export default function ProductScreen (): JSX.Element {
 
   const {id} = useParams();
@@ -36,7 +42,7 @@ export default function ProductScreen (): JSX.Element {
   }
 
   return (
-    <>
+    <div className="wrapper">
       <Header />
       <main>
         <div className="page-content">
@@ -47,12 +53,12 @@ export default function ProductScreen (): JSX.Element {
         </div>
         {modalState !== ModalState.Closed && <Modal modalState={modalState}/>}
       </main>
-      <a className="up-btn" href="#header">
+      <button type="button" className="up-btn" onClick={() => scrollToTop(0)}>
         <svg width="12" height="18" aria-hidden="true">
           <use xlinkHref="#icon-arrow2"></use>
         </svg>
-      </a>
+      </button>
       <Footer />
-    </>
+    </div>
   );
 }

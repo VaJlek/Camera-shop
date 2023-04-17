@@ -11,3 +11,4 @@ export const getCamera = (state: State) => state[NameSpace.Cameras].camera;
 export const getCameraFetchStatus = (state: State): string => state[NameSpace.Cameras].cameraFetchStatus;
 
 export const getSimilar = (state: State): Cameras | [] => state[NameSpace.Cameras].similar;
+export const getCamerasByName = (state: State): Cameras | [] => state[NameSpace.Cameras].camerasByName;

@@ -38,7 +38,7 @@ export default function ProductSimilar({ similarCameras }: ProductSimilarProps):
               ))}
             </div>
             <button
-              onMouseDown={handleSliderPrevClick}
+              onClick={handleSliderPrevClick}
               className="slider-controls slider-controls--prev"
               type="button"
               aria-label="Предыдущий слайд"
@@ -49,7 +49,7 @@ export default function ProductSimilar({ similarCameras }: ProductSimilarProps):
               </svg>
             </button>
             <button
-              onMouseDown={handleSliderNextClick}
+              onClick={handleSliderNextClick}
               className="slider-controls slider-controls--next"
               type="button"
               aria-label="Следующий слайд"

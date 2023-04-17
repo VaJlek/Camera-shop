@@ -3,7 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AppDispatch, State } from '../types/state';
 import { Camera, Cameras, Promo, Review, ReviewPost, Reviews } from '../types/types';
-import { APIRoute, ModalState } from '../const';
+import { APIRoute, ModalState, queryParams } from '../const';
 import { changeModalState } from './app-process/app-process';
 
 export const fetchPromoAction = createAsyncThunk<
@@ -129,4 +129,27 @@ export const postReviewAction = createAsyncThunk<
         throw error;
       }
     },
+  );
+
+export const fetchCamerasBySearchAction = createAsyncThunk<
+ Cameras,
+ string,
+ {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+  }>(
+    'fetchCamerasByName',
+    async (name, {extra: api}) => {
+      try {
+        const {data} = await api.get<Cameras>(APIRoute.Cameras,
+          {params: {
+            [queryParams.seachByName]:name
+          }});
+        return data;
+      } catch(error) {
+        toast.error('Cameras search error');
+        throw error;
+      }
+    }
   );

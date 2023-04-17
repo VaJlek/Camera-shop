@@ -43,3 +43,16 @@ export enum ModalState {
   ReviewForm = 'reviewForm',
   ReviewSuccess = 'reviewSuccess',
 }
+
+export const queryParams: {[key:string]: string} = {
+  camerasAmountOnPage: '_limit',
+  firstCameraOnPage: '_start',
+  seachByName: 'name_like',
+  sortType: '_sort',
+  sortOrder: '_order',
+  type: 'type',
+  category: 'category',
+  level: 'level',
+  minPrice: 'price_gte',
+  maxPrice: 'price_lte'
+} as const;

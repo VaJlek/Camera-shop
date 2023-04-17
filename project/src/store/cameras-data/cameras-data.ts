@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, FetchStatus } from '../../const';
-import { Camera, Cameras } from '../../types/types';
-import { fetchCamerasAction, fetchSimilarCamerasAction, fetchCameraAction, fetchCamerasBySearchAction } from '../api-actions';
+import { Camera, Cameras, CamerasPriceRange } from '../../types/types';
+import { fetchCamerasAction, fetchSimilarCamerasAction, fetchCameraAction, fetchCamerasBySearchAction, fetchPriceRangeAction } from '../api-actions';
 
 export type CamerasData = {
   cameras: Cameras;
@@ -11,6 +11,9 @@ export type CamerasData = {
   cameraFetchStatus: string;
   similar: Cameras;
   camerasByName: Cameras;
+  priceRange: CamerasPriceRange;
+  priceRangeFetchStatus: string;
+  currentSearchParams: [string, string][];
 };
 
 const initialState: CamerasData = {
@@ -21,19 +24,27 @@ const initialState: CamerasData = {
   cameraFetchStatus: FetchStatus.Idle,
   similar: [],
   camerasByName: [],
+  priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+  priceRangeFetchStatus: FetchStatus.Idle,
+  currentSearchParams: [],
 };
 
 export const camerasData = createSlice({
   name: NameSpace.Cameras,
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentSearchParams: (state, action: {payload: [string, string][]}) => {
+      state.currentSearchParams = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchCamerasAction.pending, (state) => {
         state.camerasFetchStatus = FetchStatus.Loading;
       })
       .addCase(fetchCamerasAction.fulfilled, (state, action) => {
-        state.cameras = action.payload;
+        state.cameras = action.payload.data;
+        state.camerasTotalCount = Number(action.payload.camerasTotalCount);
         state.camerasFetchStatus = FetchStatus.Success;
       })
       .addCase(fetchCamerasAction.rejected, (state) => {
@@ -56,8 +67,12 @@ export const camerasData = createSlice({
       })
       .addCase(fetchCamerasBySearchAction.fulfilled, (state, action) => {
         state.camerasByName = action.payload;
+      })
+      .addCase(fetchPriceRangeAction.fulfilled, (state, action) => {
+        state.priceRange = action.payload;
+        state.priceRangeFetchStatus = FetchStatus.Success;
       });
   }
 });
 
-
+export const {setCurrentSearchParams} = camerasData.actions;

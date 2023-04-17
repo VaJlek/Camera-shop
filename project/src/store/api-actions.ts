@@ -2,8 +2,8 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AppDispatch, State } from '../types/state';
-import { Camera, Cameras, Promo, Review, ReviewPost, Reviews } from '../types/types';
-import { APIRoute, ModalState, queryParams } from '../const';
+import { Camera, Cameras, CamerasFetchParams, CamerasPriceRange, Promo, Review, ReviewPost, Reviews } from '../types/types';
+import { APIRoute, ModalState, PRODUCTS_PER_PAGE, queryParams, SortOrder, SortType } from '../const';
 import { changeModalState } from './app-process/app-process';
 
 export const fetchPromoAction = createAsyncThunk<
@@ -25,19 +25,35 @@ export const fetchPromoAction = createAsyncThunk<
       }
     });
 
-export const fetchCamerasAction = createAsyncThunk<
-  Cameras,
-  undefined,
+export const fetchCamerasAction = createAsyncThunk<{
+  data: Cameras;
+  camerasTotalCount: string;
+  },
+    CamerasFetchParams,
   {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
   }>(
-    'fetchCameras',
-    async (_arg, { extra: api }) => {
+    'data/fetchCameras',
+    async ({pageId, sortType, sortOrder, minPrice, maxPrice, category, type, level}, { extra: api}) => {
       try {
-        const { data } = await api.get<Cameras>(APIRoute.Cameras);
-        return data;
+        const {data, headers} = await api.get<Cameras>(APIRoute.Cameras,
+          {params: {
+            [queryParams.camerasAmountOnPage]: PRODUCTS_PER_PAGE,
+            [queryParams.firstCameraOnPage]: String((pageId - 1) * PRODUCTS_PER_PAGE),
+            [queryParams.sortType]: sortType ? String(sortType) : null,
+            [queryParams.sortOrder]: sortOrder ? String(sortOrder) : null,
+            [queryParams.minPrice]: minPrice,
+            [queryParams.maxPrice]: maxPrice,
+            [queryParams.type]: type,
+            [queryParams.category]: category,
+            [queryParams.level]: level,
+          }});
+        return {
+          data,
+          camerasTotalCount: headers['x-total-count']
+        };
       } catch (error) {
         toast.error('Loading cameras error');
         throw error;
@@ -153,3 +169,50 @@ export const fetchCamerasBySearchAction = createAsyncThunk<
       }
     }
   );
+
+export const fetchPriceRangeAction = createAsyncThunk<
+  CamerasPriceRange,
+  CamerasFetchParams,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'fetchCamerasPriceRange',
+    async ({minPrice, maxPrice, category, type, level}, {extra: api}) => {
+      try {
+        const cameraMinPrice = await api.get<Cameras>(APIRoute.Cameras,
+          {params: {
+            [queryParams.camerasAmountOnPage]: 1,
+            [queryParams.sortType]: String(SortType.Price),
+            [queryParams.SortOrder]: String(SortOrder.Asc),
+            [queryParams.minPrice]: minPrice,
+            [queryParams.maxPrice]: maxPrice,
+            [queryParams.type]: type,
+            [queryParams.category]: category,
+            [queryParams.level]: level,
+          }});
+
+        const cameraMaxPrice = await api.get<Cameras>(APIRoute.Cameras,
+          {params: {
+            [queryParams.camerasAmountOnPage]: 1,
+            [queryParams.sortType]: String(SortType.Price),
+            [queryParams.sortOrder]: String(SortOrder.Desc),
+            [queryParams.minPrice]: minPrice,
+            [queryParams.maxPrice]: maxPrice,
+            [queryParams.type]: type,
+            [queryParams.category]: category,
+            [queryParams.level]: level,
+          }});
+
+        return {
+          camerasMinPrice: cameraMinPrice.data.length > 0 ? Number(cameraMinPrice.data[0].price) : 0,
+          camerasMaxPrice: cameraMaxPrice.data.length > 0 ? Number(cameraMaxPrice.data[0].price) : 0,
+        };
+      } catch(error) {
+        toast.error('Cameras price range loadig error');
+        throw error;
+      }
+    }
+  );
+

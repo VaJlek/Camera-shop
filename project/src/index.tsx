@@ -6,14 +6,13 @@ import browserHistory from './browser-history';
 import App from './components/app/app';
 import HistoryRouter from './components/history-route/history-route';
 import { store } from './store';
-import { fetchCamerasAction, fetchPromoAction } from './store/api-actions';
+import { fetchPromoAction } from './store/api-actions';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 store.dispatch(fetchPromoAction());
-store.dispatch(fetchCamerasAction());
 
 root.render(
   <React.StrictMode>

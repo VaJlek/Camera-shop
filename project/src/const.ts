@@ -56,3 +56,45 @@ export const queryParams: {[key:string]: string} = {
   minPrice: 'price_gte',
   maxPrice: 'price_lte'
 } as const;
+
+export const enum SortType {
+  Price = 'price',
+  Rating = 'rating'
+}
+
+export const enum SortOrder {
+  Asc = 'asc',
+  Desc = 'desc'
+}
+
+export const FilterNames: {
+  [key: string]: {
+    [key: string]: string;
+  };
+} =
+  {
+    category: {
+      photocamera: 'Фотоаппарат',
+      videocamera: 'Видеокамера',
+    },
+    type: {
+      digital: 'Цифровая',
+      film: 'Плёночная',
+      snapshot: 'Моментальная',
+      collection: 'Коллекционная'
+    },
+    level: {
+      zero: 'Нулевой',
+      nonProfessional: 'Любительский',
+      professional: 'Профессиональный'
+    }
+  } as const;
+
+export const FilterTitles : {
+      [key: string]: string;
+  } =
+    {
+      category: 'Категория',
+      type: 'Тип камеры',
+      level: 'Уровень',
+    } as const;

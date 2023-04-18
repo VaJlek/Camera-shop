@@ -1,8 +1,7 @@
 import { useEffect} from 'react';
-import { generatePath, Link, Navigate, useParams, useSearchParams } from 'react-router-dom';
+import { generatePath, Navigate, useParams, useSearchParams } from 'react-router-dom';
 import { queryParams, FetchStatus, AppRoute, PRODUCTS_PER_PAGE, DEFAULT_PAGE_NUMBER } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { store } from '../../store';
 import { fetchCamerasAction, fetchPriceRangeAction } from '../../store/api-actions';
 import { getSortOrder, getSortType } from '../../store/app-process/selectors';
 import { getCameras, getCamerasFetchStatus, getCamerasTotalCount, getCurrentSearchParams } from '../../store/cameras-data/selectors';
@@ -84,7 +83,7 @@ export default function Catalog(): JSX.Element {
               <div className="catalog__content">
                 <CatalogSort />
                 <ProductsList cameras={cameras}/>
-                <Pagination currentPage={currentPage} camerasLength={cameras.length}/>
+                <Pagination />
               </div>
             </div>
           </div>}

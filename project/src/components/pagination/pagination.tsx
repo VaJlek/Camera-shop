@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { AppRoute, PRODUCTS_PER_PAGE } from '../../const';
+import { getCamerasTotalCount } from '../../store/cameras-data/selectors';
+import { useAppSelector } from '../../hooks';
 
-type PaginationProps = {
-  camerasLength: number;
-  currentPage: number;
-};
-export default function Pagination({camerasLength, currentPage }: PaginationProps): JSX.Element {
+export default function Pagination(): JSX.Element {
 
-  const numberOfPages = Math.ceil(camerasLength / PRODUCTS_PER_PAGE);
+  const currentPage = Number(useParams().page);
+  const camerasTotalCount = useAppSelector(getCamerasTotalCount);
+  const numberOfPages = Math.ceil(camerasTotalCount / PRODUCTS_PER_PAGE);
   const pageNumbers = Array.from({ length: numberOfPages}, (v, k) => k + 1);
 
 

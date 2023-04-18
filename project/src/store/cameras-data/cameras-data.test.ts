@@ -18,6 +18,10 @@ describe('Reducer: cameras-data', () => {
       camera: undefined,
       cameraFetchStatus: FetchStatus.Idle,
       similar: [],
+      camerasByName: [],
+      priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+      priceRangeFetchStatus: FetchStatus.Idle,
+      currentSearchParams: [],
     };
   });
 
@@ -38,6 +42,10 @@ describe('Reducer: cameras-data', () => {
           camera: undefined,
           cameraFetchStatus: FetchStatus.Idle,
           similar: [],
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
 
@@ -50,6 +58,10 @@ describe('Reducer: cameras-data', () => {
           camera: undefined,
           cameraFetchStatus: FetchStatus.Idle,
           similar: [],
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
   });
@@ -65,6 +77,10 @@ describe('Reducer: cameras-data', () => {
           camera: undefined,
           cameraFetchStatus: FetchStatus.Loading,
           similar: [],
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
 
@@ -77,6 +93,10 @@ describe('Reducer: cameras-data', () => {
           camera: fakeCamera,
           cameraFetchStatus: FetchStatus.Success,
           similar: [],
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
 
@@ -90,6 +110,10 @@ describe('Reducer: cameras-data', () => {
           camera: undefined,
           cameraFetchStatus: FetchStatus.Rejected,
           similar: [],
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
   });
@@ -104,6 +128,10 @@ describe('Reducer: cameras-data', () => {
           camera: undefined,
           cameraFetchStatus: FetchStatus.Idle,
           similar: fakeCameras,
+          camerasByName: [],
+          priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
+          priceRangeFetchStatus: FetchStatus.Idle,
+          currentSearchParams: [],
         });
     });
   });

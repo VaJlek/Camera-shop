@@ -31,11 +31,11 @@ export const fetchCamerasAction = createAsyncThunk<{
   },
     CamerasFetchParams,
   {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
   }>(
-    'data/fetchCameras',
+    'fetchCameras',
     async ({pageId, sortType, sortOrder, minPrice, maxPrice, category, type, level}, { extra: api}) => {
       try {
         const {data, headers} = await api.get<Cameras>(APIRoute.Cameras,

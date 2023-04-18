@@ -2,7 +2,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import MockAdapter from 'axios-mock-adapter';
 import { Action } from 'redux';
 import thunk, { ThunkDispatch } from 'redux-thunk';
-import { APIRoute } from '../const';
+import { APIRoute, DEFAULT_PAGE_NUMBER } from '../const';
 import { createAPI } from '../services/api';
 import {
   makeFakeCamera,
@@ -10,12 +10,14 @@ import {
   makeFakeReviews,
   makeFakeCameras,
   makeFakeReviewPost,
+  FAKE_CAMERAS_AMOUNT,
 } from '../tests/mocks';
 import { State } from '../types/state';
 import { Camera } from '../types/types';
 import {
   fetchCameraAction,
   fetchCamerasAction,
+  fetchPriceRangeAction,
   fetchPromoAction,
   fetchReviewsAction,
   fetchSimilarCamerasAction,
@@ -38,17 +40,52 @@ describe('Async actions', () => {
   it('should dispatch fetchCamerasAction when GET /cameras', async () => {
     mockAPI
       .onGet(APIRoute.Cameras)
-      .reply(200, fakeCameras);
+      .reply(200, fakeCameras, { 'x-total-count': FAKE_CAMERAS_AMOUNT });
 
     const store = mockStore();
 
-    await store.dispatch(fetchCamerasAction());
+    await store.dispatch(fetchCamerasAction({
+      pageId: DEFAULT_PAGE_NUMBER,
+      sortType: null,
+      sortOrder: null,
+      minPrice: null,
+      maxPrice: null,
+      category: null,
+      type: null,
+      level: null,
+    }));
 
     const actions = store.getActions().map(( { type }: Action<string> ) => type );
 
     expect(actions).toEqual([
       fetchCamerasAction.pending.type,
       fetchCamerasAction.fulfilled.type,
+    ]);
+  });
+
+  it('should dispatch fetchPriceRangeAction when GET /cameras', async () => {
+    mockAPI
+      .onGet(APIRoute.Cameras)
+      .reply(200, fakeCameras);
+
+    const store = mockStore();
+
+    await store.dispatch(fetchPriceRangeAction({
+      pageId: DEFAULT_PAGE_NUMBER,
+      sortType: null,
+      sortOrder: null,
+      minPrice: null,
+      maxPrice: null,
+      category: null,
+      type: null,
+      level: null,
+    }));
+
+    const actions = store.getActions().map(({ type }: Action<string>) => type);
+
+    expect(actions).toEqual([
+      fetchPriceRangeAction.pending.type,
+      fetchPriceRangeAction.fulfilled.type
     ]);
   });
 
@@ -150,3 +187,5 @@ describe('Async actions', () => {
     ]);
   });
 });
+
+

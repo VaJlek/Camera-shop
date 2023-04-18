@@ -1,12 +1,16 @@
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type OrderSuccessProps = {
   onClick: () => void;
 }
 
 export default function OrderSuccess({onClick}: OrderSuccessProps): JSX.Element {
+  const navigate = useNavigate();
 
   const handleToCatalogClick = () => {
     onClick();
+    navigate(AppRoute.Catalog);
   };
 
   return (

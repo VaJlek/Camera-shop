@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { ModalState } from '../../const';
+import { Link, useNavigate } from 'react-router-dom';
+import { AppRoute, ModalState } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { changeModalState } from '../../store/app-process/app-process';
 
@@ -9,9 +9,11 @@ type BasketSuccessProps = {
 
 export default function BasketSuccess({onClick}: BasketSuccessProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleToBasketClick = () => {
     dispatch(changeModalState(ModalState.Closed));
+    navigate(AppRoute.Basket);
   };
 
   return (

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, FetchStatus } from '../../const';
-import { Camera, Cameras, CamerasPriceRange } from '../../types/types';
+import { Camera, Cameras, CamerasInBasket, CamerasPriceRange } from '../../types/types';
 import { fetchCamerasAction, fetchSimilarCamerasAction, fetchCameraAction, fetchCamerasBySearchAction, fetchPriceRangeAction } from '../api-actions';
 
 export type CamerasData = {
@@ -14,6 +14,7 @@ export type CamerasData = {
   priceRange: CamerasPriceRange;
   priceRangeFetchStatus: string;
   currentSearchParams: [string, string][];
+  camerasInBasket: CamerasInBasket;
 };
 
 const initialState: CamerasData = {
@@ -27,6 +28,7 @@ const initialState: CamerasData = {
   priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
   priceRangeFetchStatus: FetchStatus.Idle,
   currentSearchParams: [],
+  camerasInBasket: [],
 };
 
 export const camerasData = createSlice({
@@ -35,6 +37,9 @@ export const camerasData = createSlice({
   reducers: {
     setCurrentSearchParams: (state, action: {payload: [string, string][]}) => {
       state.currentSearchParams = action.payload;
+    },
+    setCamerasInBasket: (state, action: {payload: CamerasInBasket | []}) => {
+      state.camerasInBasket = action.payload;
     },
   },
   extraReducers(builder) {
@@ -75,4 +80,4 @@ export const camerasData = createSlice({
   }
 });
 
-export const {setCurrentSearchParams} = camerasData.actions;
+export const {setCurrentSearchParams, setCamerasInBasket} = camerasData.actions;

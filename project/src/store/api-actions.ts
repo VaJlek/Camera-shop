@@ -2,9 +2,10 @@ import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { AppDispatch, State } from '../types/state';
-import { Camera, Cameras, CamerasFetchParams, CamerasPriceRange, Promo, Review, ReviewPost, Reviews } from '../types/types';
+import { Camera, Cameras, CamerasFetchParams, CamerasPriceRange, Order, Promo, Review, ReviewPost, Reviews } from '../types/types';
 import { APIRoute, ModalState, PRODUCTS_PER_PAGE, queryParams, SortOrder, SortType } from '../const';
 import { changeModalState } from './app-process/app-process';
+import { setCamerasInBasket } from './cameras-data/cameras-data';
 
 export const fetchPromoAction = createAsyncThunk<
   Promo,
@@ -216,3 +217,25 @@ export const fetchPriceRangeAction = createAsyncThunk<
     }
   );
 
+export const postOrderAction = createAsyncThunk<void, Order,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/post Order',
+    async ({camerasIds}, {extra: api, dispatch}) => {
+      try {
+        await api.post(APIRoute.Orders, {
+          camerasIds: camerasIds,
+
+        });
+
+        dispatch(changeModalState(ModalState.OrderSuccess));
+        dispatch(setCamerasInBasket([]));
+
+      } catch(error) {
+        toast.error('Order post error');
+        throw error;
+      }
+    });

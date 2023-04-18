@@ -17,6 +17,7 @@ export enum APIRoute {
   Camera = '/cameras/:id',
   Reviews = '/reviews',
   Promo = '/promo',
+  Orders = '/orders'
 }
 
 export enum NameSpace {
@@ -24,6 +25,7 @@ export enum NameSpace {
   Promo = 'PROMO',
   App = 'APP',
   Reviews = 'REVIEWS',
+  Order = 'ORDER'
 }
 
 export const enum FetchStatus {
@@ -42,6 +44,10 @@ export enum ModalState {
   Closed = 'closed',
   ReviewForm = 'reviewForm',
   ReviewSuccess = 'reviewSuccess',
+  BasketAddItem = 'basketAddItem',
+  BasketDelItem = 'basketDelItem',
+  BasketSuccess = 'basketSuccess',
+  OrderSuccess = 'orderSuccess'
 }
 
 export const queryParams: {[key:string]: string} = {

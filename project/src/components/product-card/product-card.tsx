@@ -1,8 +1,11 @@
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
-import { Camera } from '../../types/types';
+import { AppRoute, ModalState } from '../../const';
+import { Camera, CamerasInBasket } from '../../types/types';
 import RateStars from '../rate-stars/rate-stars';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getCamerasInBasket } from '../../store/cameras-data/selectors';
+import { changeModalState, setSelectedCamera } from '../../store/app-process/app-process';
 
 type ProductProps = {
   camera: Camera;
@@ -10,6 +13,31 @@ type ProductProps = {
 };
 
 export default function ProductCard ({ camera, isActive }: ProductProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const camerasInBasket: CamerasInBasket = useAppSelector(getCamerasInBasket);
+  const cameraInBasket = camerasInBasket.filter((item) => item.id === camera.id);
+
+  const HandleClickBuyButton = () => {
+    dispatch(setSelectedCamera(camera));
+    dispatch(changeModalState(ModalState.BasketAddItem));
+  };
+
+  const getBuyButton = () => cameraInBasket.length > 0
+    ?
+    <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" to={AppRoute.Basket}>
+      <svg width="16" height="16" aria-hidden="true">
+        <use xlinkHref="#icon-basket"></use>
+      </svg>В корзине
+    </Link>
+    :
+    <button
+      onClick={HandleClickBuyButton}
+      className="btn btn--purple product-card__btn"
+      type="button"
+    >
+      Купить
+    </button>;
+
   return(
     <div className={cn('product-card', {'is-active' : isActive})}>
       <div className="product-card__img">
@@ -40,11 +68,7 @@ export default function ProductCard ({ camera, isActive }: ProductProps): JSX.El
 
       </div>
       <div className="product-card__buttons">
-        <a className="btn btn--purple-border product-card__btn product-card__btn--in-cart" href="#">
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-basket"></use>
-          </svg>В корзине
-        </a>
+        {getBuyButton()}
         <Link to={`${AppRoute.Product}/${camera.id}`} className="btn btn--transparent">Подробнее
         </Link>
       </div>

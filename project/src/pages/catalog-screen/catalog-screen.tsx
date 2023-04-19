@@ -4,13 +4,16 @@ import Catalog from '../../components/catalog/catalog';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import LoadingScreen from '../../components/loading/loading';
-import { FetchStatus } from '../../const';
+import Modal from '../../components/modal/modal';
+import { FetchStatus, ModalState } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getModalState } from '../../store/app-process/selectors';
 import { getPromoFetchStatus } from '../../store/promo-data/selectors';
 
 export default function CatalogScreen (): JSX.Element {
 
   const promoFetchStatus = useAppSelector(getPromoFetchStatus);
+  const modalState: string = useAppSelector(getModalState);
 
   if (
     promoFetchStatus === FetchStatus.Idle ||
@@ -28,6 +31,7 @@ export default function CatalogScreen (): JSX.Element {
         <div className="page-content">
           <Breadcrumbs />
           <Catalog />
+          {modalState !== ModalState.Closed && <Modal modalState={modalState}/>}
         </div>
       </main>
       <Footer/>

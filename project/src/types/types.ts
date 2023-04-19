@@ -65,3 +65,15 @@ export type CamerasFetchParams = {
   minPrice: string | string[] | null;
   maxPrice: string | string[] | null;
 }
+
+export type CameraInBasket = {
+  id: number;
+  amount: number;
+  camera: Camera;
+}
+
+export type CamerasInBasket = CameraInBasket[];
+
+export type Order = {
+  camerasIds: number[];
+};

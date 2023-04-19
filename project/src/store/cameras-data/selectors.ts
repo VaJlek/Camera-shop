@@ -1,6 +1,6 @@
 import { NameSpace } from '../../const';
 import { State } from '../../types/state';
-import { Cameras, CamerasPriceRange } from '../../types/types';
+import { Cameras, CamerasInBasket, CamerasPriceRange } from '../../types/types';
 
 export const getCameras = (state: State): Cameras | [] => state[NameSpace.Cameras].cameras;
 export const getCamerasFetchStatus = (state: State): string => state[NameSpace.Cameras].camerasFetchStatus;
@@ -17,3 +17,5 @@ export const getCurrentSearchParams = (state: State): [string, string][] => stat
 
 export const getPriceRange = (state: State): CamerasPriceRange => state[NameSpace.Cameras].priceRange;
 export const getPriceRangeFetchStatus = (state: State): string => state[NameSpace.Cameras].priceRangeFetchStatus;
+
+export const getCamerasInBasket = (state: State): CamerasInBasket | [] => state[NameSpace.Cameras].camerasInBasket;

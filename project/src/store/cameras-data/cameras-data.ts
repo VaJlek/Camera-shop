@@ -10,7 +10,7 @@ export type CamerasData = {
   camera?: Camera;
   cameraFetchStatus: string;
   similar: Cameras;
-  camerasByName: Camera[];
+  camerasByName: Cameras;
   priceRange: CamerasPriceRange;
   priceRangeFetchStatus: string;
   currentSearchParams: [string, string][];

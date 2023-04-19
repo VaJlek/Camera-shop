@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import SearchForm from '../search-form/search-form';
+import { useAppSelector } from '../../hooks';
+import { getBasketAmount } from '../../store/app-process/selectors';
 
 export default function Header (): JSX.Element {
+  const basketAmount = useAppSelector(getBasketAmount);
+
   return (
     <header className="header" id="header">
       <div className="container">
@@ -15,11 +19,11 @@ export default function Header (): JSX.Element {
           <ul className="main-nav__list">
             <li className="main-nav__item"><Link className="main-nav__link" to={AppRoute.Root}>Каталог</Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">Гарантии</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to="#">Гарантии</Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">Доставка</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to="#">Доставка</Link>
             </li>
-            <li className="main-nav__item"><a className="main-nav__link" href="#">О компании</a>
+            <li className="main-nav__item"><Link className="main-nav__link" to="#">О компании</Link>
             </li>
           </ul>
         </nav>
@@ -28,6 +32,7 @@ export default function Header (): JSX.Element {
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
+          {basketAmount !== 0 && <span className="header__basket-count">{basketAmount}</span>}
         </Link>
       </div>
     </header>

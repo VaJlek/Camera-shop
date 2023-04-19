@@ -1,15 +1,17 @@
 import cn from 'classnames';
 import { useEffect, useState } from 'react';
-import { Tab } from '../../const';
+import { ModalState, Tab } from '../../const';
 import { Camera } from '../../types/types';
 import RateStars from '../rate-stars/rate-stars';
+import { useAppDispatch } from '../../hooks';
+import { changeModalState, setSelectedCamera } from '../../store/app-process/app-process';
 
 type ProductProps = {
   camera: Camera;
 }
 
 export default function Product({camera}: ProductProps): JSX.Element {
-
+  const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState(Tab.Specification);
 
   useEffect(() => {
@@ -19,6 +21,12 @@ export default function Product({camera}: ProductProps): JSX.Element {
   const getClassName = (className: string, tabName: string) => cn(className, {
     'is-active': activeTab === tabName
   });
+
+  const HandleClickBuyButton = () => {
+    dispatch(setSelectedCamera(camera));
+    dispatch(changeModalState(ModalState.BasketAddItem));
+  };
+
 
   return (
     <div className="page-content__section">
@@ -47,7 +55,11 @@ export default function Product({camera}: ProductProps): JSX.Element {
               <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{camera.reviewCount}</p>
             </div>
             <p className="product__price"><span className="visually-hidden">Цена:</span>{camera.price} ₽</p>
-            <button className="btn btn--purple" type="button">
+            <button
+              onClick={HandleClickBuyButton}
+              className="btn btn--purple"
+              type="button"
+            >
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину

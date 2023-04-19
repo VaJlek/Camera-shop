@@ -5,6 +5,7 @@ import { camerasData } from './cameras-data/cameras-data';
 import { promoData } from './promo-data/promo-data';
 import { reviewsData } from './rewiews-data/rewiews-data';
 import { orderData } from './order-data/order-data';
+import { couponData } from './coupone-data/coupon-data';
 
 export const rootReducer = combineReducers({
   [NameSpace.App]: appProcess.reducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   [NameSpace.Cameras]: camerasData.reducer,
   [NameSpace.Reviews]: reviewsData.reducer,
   [NameSpace.Order]: orderData.reducer,
+  [NameSpace.Coupons]: couponData.reducer,
 });

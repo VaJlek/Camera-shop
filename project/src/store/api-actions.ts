@@ -6,6 +6,7 @@ import { Camera, Cameras, CamerasFetchParams, CamerasPriceRange, Order, Promo, R
 import { APIRoute, ModalState, PRODUCTS_PER_PAGE, queryParams, SortOrder, SortType } from '../const';
 import { changeModalState } from './app-process/app-process';
 import { setCamerasInBasket } from './cameras-data/cameras-data';
+import { setCoupon } from './coupone-data/coupon-data';
 
 export const fetchPromoAction = createAsyncThunk<
   Promo,
@@ -224,18 +225,36 @@ export const postOrderAction = createAsyncThunk<void, Order,
     extra: AxiosInstance;
   }>(
     'data/post Order',
-    async ({camerasIds}, {extra: api, dispatch}) => {
+    async ({camerasIds, coupon}, {extra: api, dispatch}) => {
       try {
         await api.post(APIRoute.Orders, {
           camerasIds: camerasIds,
-
+          coupon: coupon
         });
 
         dispatch(changeModalState(ModalState.OrderSuccess));
         dispatch(setCamerasInBasket([]));
-
+        dispatch(setCoupon(''));
       } catch(error) {
         toast.error('Order post error');
+        throw error;
+      }
+    });
+
+export const postCouponGetDiscount = createAsyncThunk<number, string,
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }>(
+    'data/post Coupon',
+    async (coupon, {extra: api, dispatch}) => {
+      try {
+        const {data} = await api.post<number>(APIRoute.Сoupons, {coupon});
+        dispatch(setCoupon(coupon));
+        return data;
+      } catch(error) {
+        toast.error('Coupon post error');
         throw error;
       }
     });

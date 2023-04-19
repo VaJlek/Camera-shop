@@ -17,7 +17,8 @@ export enum APIRoute {
   Camera = '/cameras/:id',
   Reviews = '/reviews',
   Promo = '/promo',
-  Orders = '/orders'
+  Orders = '/orders',
+  Сoupons = '/coupons'
 }
 
 export enum NameSpace {
@@ -25,7 +26,8 @@ export enum NameSpace {
   Promo = 'PROMO',
   App = 'APP',
   Reviews = 'REVIEWS',
-  Order = 'ORDER'
+  Order = 'ORDER',
+  Coupons = 'COUPONS'
 }
 
 export const enum FetchStatus {
@@ -97,10 +99,20 @@ export const FilterNames: {
   } as const;
 
 export const FilterTitles : {
-      [key: string]: string;
+    [key: string]: string;
   } =
     {
       category: 'Категория',
       type: 'Тип камеры',
       level: 'Уровень',
     } as const;
+
+export const Coupons : {
+    [key: string]: string;
+  } =
+    {
+      'camera-333': 'camera-333',
+      'camera-444': 'camera-444',
+      'camera-555': 'camera-555',
+    } as const;
+

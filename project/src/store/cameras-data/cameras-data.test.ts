@@ -22,6 +22,7 @@ describe('Reducer: cameras-data', () => {
       priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
       priceRangeFetchStatus: FetchStatus.Idle,
       currentSearchParams: [],
+      camerasInBasket: []
     };
   });
 
@@ -46,6 +47,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
 
@@ -62,6 +64,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
   });
@@ -81,6 +84,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
 
@@ -97,6 +101,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
 
@@ -114,6 +119,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
   });
@@ -132,6 +138,7 @@ describe('Reducer: cameras-data', () => {
           priceRange: {camerasMinPrice: 0, camerasMaxPrice: 0},
           priceRangeFetchStatus: FetchStatus.Idle,
           currentSearchParams: [],
+          camerasInBasket: []
         });
     });
   });

@@ -76,4 +76,5 @@ export type CamerasInBasket = CameraInBasket[];
 
 export type Order = {
   camerasIds: number[];
+  coupon: string | null;
 };

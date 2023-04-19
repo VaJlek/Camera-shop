@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import { makeFakeCamera, makeFakeCameras, makeFakePromo, storeForFake } from '../../tests/mocks';
+import { makeFakeCamera, makeFakeCameras, makeFakeCamerasInBasket, makeFakePromo, storeForFake } from '../../tests/mocks';
 import HistoryRoute from '../../components/history-route/history-route';
 import { FetchStatus, ModalState } from '../../const';
 import CatalogScreen from './catalog-screen';
@@ -10,6 +10,7 @@ const history = createMemoryHistory();
 const fakeCamera = makeFakeCamera();
 const fakeCameras = makeFakeCameras();
 const fakePromo = makeFakePromo();
+const fakeCamerasInBasket = makeFakeCamerasInBasket();
 
 describe('Component: CatalogScreen', () => {
   it('should render correctly', () => {
@@ -19,6 +20,7 @@ describe('Component: CatalogScreen', () => {
         cameras: fakeCameras,
         camerasFetchStatus: FetchStatus.Success,
         camera: fakeCamera,
+        camerasInBasket: fakeCamerasInBasket
       },
       APP: {
         ModalState: ModalState.Closed,

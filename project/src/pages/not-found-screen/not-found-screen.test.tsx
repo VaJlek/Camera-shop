@@ -1,18 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import HistoryRoute from '../../components/history-route/history-route';
-import { makeFakeCameras, storeForFake } from '../../tests/mocks';
+import { makeFakeCameras, makeFakeCamerasInBasket, storeForFake } from '../../tests/mocks';
 import { Provider } from 'react-redux';
 import NotFoundScreen from './not-found-screen';
 
 const history = createMemoryHistory();
 const fakeCameras = makeFakeCameras();
+const fakeCamerasInBasket = makeFakeCamerasInBasket();
 
 describe('Component: ProductPage', () => {
   it('should render correctly', () => {
     const fakeStore = storeForFake({
       CAMERAS: {
         camerasByName: fakeCameras,
+        camerasInBasket: fakeCamerasInBasket
       },
     });
 

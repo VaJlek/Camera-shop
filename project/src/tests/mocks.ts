@@ -1,5 +1,5 @@
 import { commerce, datatype, image, internet } from 'faker';
-import { Camera, Cameras, Promo, Review, ReviewPost } from '../types/types';
+import { Camera, Cameras, CamerasInBasket, Order, Promo, Review, ReviewPost } from '../types/types';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import thunk from 'redux-thunk';
 import { createAPI } from '../services/api';
@@ -68,6 +68,37 @@ export const makeFakeReviewPost = (): ReviewPost => ({
   disadvantage: datatype.string(),
   cameraId: datatype.number(),
 });
+
+export const makeFakeCamerasInBasket = (): CamerasInBasket => {
+  const CameraId = datatype.number({min: 0, max: 15 });
+
+  return ([{
+    id: CameraId,
+    amount: datatype.number({min: 1, max: 99 }),
+    camera: {
+      id: CameraId,
+      name: commerce.product(),
+      vendorCode: datatype.string(),
+      type: datatype.string(),
+      category: datatype.string(),
+      description: commerce.productDescription(),
+      level: datatype.string(),
+      rating: datatype.number({min: 0, max: 5}),
+      price: datatype.number(),
+      previewImg: image.imageUrl(),
+      previewImg2x: image.imageUrl(),
+      previewImgWebp: image.imageUrl(),
+      previewImgWebp2x: image.imageUrl(),
+      reviewCount: datatype.number()
+    }}]);
+};
+
+export const makeFakeOrder = (): Order => ({
+  camerasIds: [datatype.number({min: 0, max: 5}), datatype.number({min: 0, max: 5}), datatype.number({min: 0, max: 5})],
+  coupon: 'camera-444',
+});
+
+
 
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];

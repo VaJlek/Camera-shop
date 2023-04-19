@@ -65,18 +65,9 @@ export default function ProductCard ({ camera, isActive }: ProductProps): JSX.El
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>
           {`${camera.price} ₽ `}
         </p>
-
       </div>
       <div className="product-card__buttons">
-<<<<<<< HEAD
-        <Link className="btn btn--purple-border product-card__btn product-card__btn--in-cart" href="#">
-          <svg width="16" height="16" aria-hidden="true">
-            <use xlinkHref="#icon-basket"></use>
-          </svg>В корзине
-        </Link>
-=======
         {getBuyButton()}
->>>>>>> origin/basket
         <Link to={`${AppRoute.Product}/${camera.id}`} className="btn btn--transparent">Подробнее
         </Link>
       </div>

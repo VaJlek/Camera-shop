@@ -10,7 +10,7 @@ export default function OrderSuccess({onClick}: OrderSuccessProps): JSX.Element 
 
   const handleToCatalogClick = () => {
     onClick();
-    navigate(AppRoute.Catalog);
+    navigate(AppRoute.Root);
   };
 
   return (

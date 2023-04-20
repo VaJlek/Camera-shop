@@ -98,8 +98,6 @@ export const makeFakeOrder = (): Order => ({
   coupon: 'camera-444',
 });
 
-
-
 const api = createAPI();
 const middlewares = [thunk.withExtraArgument(api)];
 export const storeForFake = configureMockStore(middlewares);

@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import { toast } from 'react-hot-toast';
 import { AppDispatch, State } from '../types/state';
 import { Camera, Cameras, CamerasFetchParams, CamerasPriceRange, Order, Promo, Review, ReviewPost, Reviews } from '../types/types';
 import { APIRoute, ModalState, PRODUCTS_PER_PAGE, queryParams, SortOrder, SortType } from '../const';

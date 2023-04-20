@@ -1,6 +1,11 @@
+import { InfinitySpin } from 'react-loader-spinner';
+
 function LoadingScreen(): JSX.Element {
   return (
-    <p>Loading ...</p>
+    <InfinitySpin
+      width='200'
+      color="blue"
+    />
   );
 }
 

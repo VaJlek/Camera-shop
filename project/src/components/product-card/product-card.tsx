@@ -17,7 +17,7 @@ export default function ProductCard ({ camera, isActive }: ProductProps): JSX.El
   const camerasInBasket: CamerasInBasket = useAppSelector(getCamerasInBasket);
   const cameraInBasket = camerasInBasket.filter((item) => item.id === camera.id);
 
-  const HandleClickBuyButton = () => {
+  const handleClickBuyButton = () => {
     dispatch(setSelectedCamera(camera));
     dispatch(changeModalState(ModalState.BasketAddItem));
   };
@@ -31,7 +31,7 @@ export default function ProductCard ({ camera, isActive }: ProductProps): JSX.El
     </Link>
     :
     <button
-      onClick={HandleClickBuyButton}
+      onClick={handleClickBuyButton}
       className="btn btn--purple product-card__btn"
       type="button"
     >

@@ -22,7 +22,7 @@ export default function Product({camera}: ProductProps): JSX.Element {
     'is-active': activeTab === tabName
   });
 
-  const HandleClickBuyButton = () => {
+  const handleClickBuyButton = () => {
     dispatch(setSelectedCamera(camera));
     dispatch(changeModalState(ModalState.BasketAddItem));
   };
@@ -56,7 +56,7 @@ export default function Product({camera}: ProductProps): JSX.Element {
             </div>
             <p className="product__price"><span className="visually-hidden">Цена:</span>{camera.price} ₽</p>
             <button
-              onClick={HandleClickBuyButton}
+              onClick={handleClickBuyButton}
               className="btn btn--purple"
               type="button"
             >
